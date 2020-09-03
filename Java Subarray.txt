@@ -1,0 +1,56 @@
+/*
+23/02/2020
+
+can be improved on line 51
+*/
+
+	 public static void main(String[] args) {
+	        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+	        int arr[]=new int[100];
+	        int n;
+
+	        Scanner sc=new Scanner(System.in);        
+	        n=sc.nextInt();
+	        if(n>=1&&n<=100)
+	        {
+	        int sum[]=new int[(n*(n+1)/2)+1];
+	        for(int i=0;i<n;i++)
+	        {
+	            arr[i]=sc.nextInt();
+	            
+	        }
+
+	        sc.close();
+	        
+	        
+	        int k=0;
+	     
+	        int i=0;int count=0;
+	        
+	        do {
+	            sum[k]=arr[i];
+	            if(n>1)
+	            	{
+	            do {
+	                k++;
+	                i++;
+	                sum[k]=arr[i]+sum[k-1];
+	            }while(i<n-1);
+	            	}
+	                k++;
+	                i=count+1;
+	                count++;
+	        }while(i<n-1 && k<=(n*(n+1)/2)+1);
+	        int counter=0;
+	        for(int x:sum)
+	        {if(x<0)
+	        {
+	            counter++;
+	        }
+	        }
+	        if(counter>5000)
+	        	counter++;
+	        System.out.println(counter);        
+	        }
+	    }
+	}

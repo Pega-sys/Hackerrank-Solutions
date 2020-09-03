@@ -1,0 +1,134 @@
+/*
+21/02/2020
+code works
+alternative code below this one.
+
+*/
+
+////////////////////////////////////////////////////////////////////////////
+   static boolean isAnagram(String a, String b) {
+      a=a.toUpperCase();
+            b=b.toUpperCase();
+            
+            StringBuilder c=new StringBuilder(b);
+            
+            boolean flag=false;
+            
+            if(a.length()==b.length())
+            {
+                for(int i=0;i<a.length();i++)
+                {
+                    for(int j=0;j<c.length();j++)
+                    {
+                        if(a.charAt(i)==c.charAt(j))
+                        {
+                            c.deleteCharAt(j);
+                            if(i==a.length()-1 && c.length()==0)
+                            {
+                                flag=true;
+                                break;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            return flag;      
+        }
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//The below code works fine but doesn't work in Hackerrank coz it needs the hashmap class to be added.And hackerrank provides only scanner class for this problem.
+import java.util.*;
+
+public class reader {
+	
+
+	    static boolean isAnagram(String a, String b) {
+	    	int n,temp;
+
+	    	char lettera,letterb;
+
+			char tmp=(char)97;
+			n=a.length();
+	    	HashMap<Character, Integer> mapa=new HashMap<>();
+	    	HashMap<Character, Integer> mapb=new HashMap<>();
+	    	a=a.toLowerCase();
+	    	b=b.toLowerCase();
+	    	if(n==b.length())
+	    	{
+	    		for(int i=0;i<26;i++)
+	    		{
+	    		mapa.put(tmp,0);
+				mapb.put(tmp,0);
+				tmp++;
+	    		}
+	    		for(int i=0;i<n;i++) {
+    				lettera=a.charAt(i);
+    				letterb=b.charAt(i);
+
+	    			for(int j=i;j<n;j++) {
+		    			
+	    				if(lettera==a.charAt(j))
+	    			{	
+	    				if(!mapa.containsKey(lettera))
+	    				{
+		    				mapa.put(lettera,1);
+	    				}
+	    				else
+	    				{
+	    					temp=mapa.get(lettera);
+	    					temp++;
+	    					mapa.replace(lettera,temp);
+
+	    				}
+	    			}
+	    				
+	    				if(letterb==b.charAt(j))
+	    				{	
+	    					if(!mapb.containsKey(letterb))
+		    				{
+			    				mapb.put(letterb,1);
+		    				}
+		    				else
+		    				{
+		    					temp=mapb.get(letterb);
+		    					temp++;
+		    					mapb.replace(letterb,temp);
+
+		    				}
+	    			}
+	    				
+	    			}
+	    		}
+	    		
+	    		
+	    		System.out.println(mapa.toString());
+	    		System.out.println(mapb.toString());
+	    		
+	    		
+	    		
+	    		return mapa.equals(mapb);
+	    		
+	    		
+	    		
+	    	}
+	    	else
+	    	{
+	    		return false;
+	    	}
+	    	
+	    }
+
+	  public static void main(String[] args) {
+	    
+	        Scanner scan = new Scanner(System.in);
+	        String a = scan.next();
+	        String b = scan.next();
+	        scan.close();
+	        boolean ret = isAnagram(a, b);
+	        System.out.println( (ret) ? "Anagrams" : "Not Anagrams" );
+	    }
+	}
